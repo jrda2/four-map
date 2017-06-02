@@ -31,17 +31,19 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">Neighborhood Map</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
           <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Neighborhood
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" data-bind="foreach: postalCodes">
+               <a href="#" data-bind ="click: $root.postalDrop"><li data-bind="text: title"></li></a>
+              </ul>
+            </div>
           </form>
         </div>
       </div>
@@ -55,8 +57,7 @@
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Dashboard</h1>
-           <h3> Google Maps Example </h3>
+          <h1 class="page-header">Where is my sushi?</h1>
            <div id="map"> </div>
 
           </div>
@@ -69,8 +70,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="js/layout.js"> </script>
-
 <script>
 
 function RestaurantViewModel (){
@@ -79,6 +78,13 @@ function RestaurantViewModel (){
     self.restaurants = ko.observableArray();
     self.list_rest = ko.observableArray();
     self.rest_markers = ko.observableArray();
+    
+    self.alt_markers = ko.observableArray();
+
+    self.postalCodes = [
+    { title: "94109"}, 
+    { title: "94015"}, 
+    { title: "94110"}];
 
     self.getContent = function() {
        $.ajax({
@@ -89,7 +95,7 @@ function RestaurantViewModel (){
             dataType: "jsonp",
 
             data: {
-             q: "select id,name,location.lat,location.lng from response.venue",
+             q: "select id,name,location.lat,location.lng, location.postalCode from response.venue",
              format: "json"
             },
        success: function (response) {
@@ -124,6 +130,7 @@ function RestaurantViewModel (){
             phone: data_obj.contact.phone,
             lat: data_obj.location.lat,
             lng: data_obj.location.lng,
+            postal: data_obj.location.postalCode,
             stats: {
                 checkins: data_obj.stats.checkinsCount,
                 tips: data_obj.stats.tipCount,
@@ -142,7 +149,8 @@ function RestaurantViewModel (){
                 position: latLng,
                 map: self.map,
                 animation: google.maps.Animation.DROP,
-                title: restaurants[i].title
+                title: restaurants[i].title,
+                postal: restaurants[i].postal
                 });
 
             self.rest_markers.push(marker);
@@ -151,33 +159,13 @@ function RestaurantViewModel (){
             });
             self.bindInfoWindow(marker, self.map, infoWindow, contentString);
             self.list_rest.push(restaurants[i]);
-            // bindMarker(marker);
         }
-        // self.bindMarkerList(self.rest_markers());
     }
-    
-    // self.bindMarker = function (marker) {
-    //     $('.res').on('click', function(){
-    //             google.maps.event.trigger(marker, 'click');
-    //         });
-    //     console.log(marker);
-    //     }
 
     self.bindMarker = function (marker) {
-            $('.res').on('click', function(){
-                google.maps.event.trigger(marker, 'click');
-            });
-            console.log(marker);
-        }   
-
-    self.bindMarkerList = function (markers) {
-        for (var i = 0, length = markers.length; i < length; i++) {
-            $('.res').on('click', function(){
-                    google.maps.event.trigger(markers[i], 'click');
-                });
-            console.log(markers[i]);
-        }
-    }    
+        google.maps.event.trigger(marker, 'click');
+        console.log(marker);
+        }    
 
     self.bindInfoWindow = function(marker, map, infowindow, contentString){
         marker.addListener('click', function() {
@@ -192,6 +180,26 @@ function RestaurantViewModel (){
         });
     }
 
+    self.postalDrop = function (postal) {
+        var query = [];
+        for (var i = 0, length = self.rest_markers.length; i<length; i++) {
+            if (self.rest_markers[i].postal == postal) {
+                console.log("matched");
+            } else {
+                self.alt_markers.push(rest_markers[i]);
+                self.rest_markers.pop(i);
+            }   
+        }
+    }
+
+    // self.filterPlaces = ko.computed(function () {
+    //     var q = self.Query();
+    //     return self.items.filter(function(i) {
+    //       return i.Name.toLowerCase().indexOf(q) >= 0;
+    //     });
+    // });
+
+
     self.initMap = function(){
         self.map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 37.784469, lng: -122.407986},
@@ -205,7 +213,6 @@ var myRestModel = new RestaurantViewModel();
 ko.applyBindings(myRestModel);
 
 
-
 function initMap() {
     myRestModel.initMap();
 }
@@ -213,10 +220,6 @@ function initMap() {
 function gError() {
     windows.alert("Maps is currently not available");
     }
-
-// document.getElementbyID("res").addEventListener("click", function (){
-    
-// });
 
 
 </script>
