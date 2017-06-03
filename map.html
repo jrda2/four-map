@@ -41,7 +41,7 @@
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" data-bind="foreach: postalCodes">
-               <a href="#" data-bind ="click: $root.postalDrop"><li data-bind="text: title"></li></a>
+               <li data-bind="text: title, click: $root.postalDrop"></li>
               </ul>
             </div>
           </form>
@@ -53,7 +53,9 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul data-bind="foreach: rest_markers" class="nav nav-sidebar">
-            <a href="#" data-bind="click: $root.bindMarker"><li class="res" data-bind="text: title"></li></a>
+           <span data-bind= "visible: setPostVis()"> 
+           <li class="res" data-bind="text: title, click: $root.bindMarker"></li>
+           </span>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -75,11 +77,13 @@
 function RestaurantViewModel (){
     var self = this;
 
+
+
     self.restaurants = ko.observableArray();
     self.list_rest = ko.observableArray();
     self.rest_markers = ko.observableArray();
-    
     self.alt_markers = ko.observableArray();
+
 
     self.postalCodes = [
     { title: "94109"}, 
@@ -150,7 +154,8 @@ function RestaurantViewModel (){
                 map: self.map,
                 animation: google.maps.Animation.DROP,
                 title: restaurants[i].title,
-                postal: restaurants[i].postal
+                postal: restaurants[i].postal,
+                setPostVis: ko.observable(true)
                 });
 
             self.rest_markers.push(marker);
@@ -164,7 +169,6 @@ function RestaurantViewModel (){
 
     self.bindMarker = function (marker) {
         google.maps.event.trigger(marker, 'click');
-        console.log(marker);
         }    
 
     self.bindInfoWindow = function(marker, map, infowindow, contentString){
@@ -181,24 +185,20 @@ function RestaurantViewModel (){
     }
 
     self.postalDrop = function (postal) {
-        var query = [];
-        for (var i = 0, length = self.rest_markers.length; i<length; i++) {
-            if (self.rest_markers[i].postal == postal) {
+        for (var i = 0, length = self.rest_markers().length; i < length; i++) {
+            if (self.rest_markers()[i].postal == postal) {
                 console.log("matched");
             } else {
-                self.alt_markers.push(rest_markers[i]);
-                self.rest_markers.pop(i);
+                self.rest_markers()[i].setPostVis = ko.observable(false);
             }   
         }
     }
 
-    // self.filterPlaces = ko.computed(function () {
-    //     var q = self.Query();
-    //     return self.items.filter(function(i) {
-    //       return i.Name.toLowerCase().indexOf(q) >= 0;
-    //     });
-    // });
-
+    self.clearPostalDrop = function() {
+        for (var i = 0, length = self.rest_markers().length; i < length; i++) {
+            self.rest_markers()[i].setPostVis = ko.observable(true);
+    }
+}
 
     self.initMap = function(){
         self.map = new google.maps.Map(document.getElementById('map'), {
