@@ -53,7 +53,7 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul data-bind="foreach: rest_markers" class="nav nav-sidebar">
-           <span data-bind= "visible: setPostVis()"> 
+           <span data-bind= "visible: setPostVis"> 
            <li class="res" data-bind="text: title, click: $root.bindMarker"></li>
            </span>
           </ul>
@@ -87,7 +87,7 @@ function RestaurantViewModel (){
 
     self.postalCodes = [
     { title: "94109"}, 
-    { title: "94015"}, 
+    { title: "94118"}, 
     { title: "94110"}];
 
     self.getContent = function() {
@@ -186,7 +186,7 @@ function RestaurantViewModel (){
 
     self.postalDrop = function (postal) {
         for (var i = 0, length = self.rest_markers().length; i < length; i++) {
-            if (self.rest_markers()[i].postal == postal) {
+            if (self.rest_markers()[i].postal == postal.title) {
                 console.log("matched");
             } else {
                 self.rest_markers()[i].setPostVis = ko.observable(false);
