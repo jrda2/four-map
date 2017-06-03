@@ -1,6 +1,6 @@
 Neighborhood Map
 ===================
-This is a project for Front End Web Dev program for Udacity. The map allows you to see some of the sushi restaurants in Downtown San Francisco and filter based on select zip codes.
+This is a project for Front End Web Dev nanodegree for Udacity. The map allows you to see some of the sushi restaurants in Downtown San Francisco and filter based on select zip codes.
 
 ----------
 User Flow
