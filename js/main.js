@@ -28,7 +28,7 @@ function RestaurantViewModel() {
     //the data and add its to the map
     self.getContent = function() {
            $.ajax({
-                url: "ttps://api.foursquare.com/v2/venues/search?ll=37.784469,-122.407986&query=sushi&client_id=G5TOZ3XNP4JW4UBDSZB0JZ54RLFGYPLGLHON22FTT5QUI0GR&client_secret=C1HH2ESSFEZ5XPGZDR5TRN1V3ABO0P1G53NDXK3C33GPCS3R&v=20170524",
+                url: "https://api.foursquare.com/v2/venues/search?ll=37.784469,-122.407986&query=sushi&client_id=G5TOZ3XNP4JW4UBDSZB0JZ54RLFGYPLGLHON22FTT5QUI0GR&client_secret=C1HH2ESSFEZ5XPGZDR5TRN1V3ABO0P1G53NDXK3C33GPCS3R&v=20170524",
 
                 jsonp: "callback",
 
