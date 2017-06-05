@@ -182,5 +182,5 @@ function initMap() {
 }
 
 function gError() {
-    windows.alert("Map is currently not available");
+    window.alert("Map is currently not available");
 }
