@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>Neighborhood Map</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    </head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Neighborhood Map</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Zipcode
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" data-bind="foreach: postalCodes">
+               <li class="dropdown-item" data-bind="text: title, click: $root.postalDrop"></li>
+              </ul>
+            </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <h3> Restaurant List </h3> <p class="link_a" data-bind="click: clearPostalDrop"> (X)Clear Search </p>
+          <ul data-bind="foreach: rest_markers" class="nav nav-sidebar">
+         <span data-bind= "visible: visible">
+           <li class="res" data-bind="text: title, click: $root.bindMarker"></li>
+           </span>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Where is my sushi?</h1>
+           <div id="map"> </div>
+
+          </div>
+      </div>
+    </div>
+
+
+<!-- JS CODE -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+
+<script type="text/javascript" async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkYowSd7WqlQNvH4Fqy_TZDFb7IFainKY&callback=initMap&onerror=gError"></script>
+
+</body>
+</html>
