@@ -1,12 +1,15 @@
 Neighborhood Map
 ===================
 This is a project for Front End Web Dev nanodegree for Udacity. The map allows you to see some of the sushi restaurants in Downtown San Francisco and filter based on select zip codes.
+<<<<<<< HEAD
 
 ----------
 How to run the app
 -------------
 Download or clone the repository from Github to your local machine. Click on index.html
 to view the app in your browser.
+=======
+>>>>>>> 0c04ccdfef5dbb3721b7f0960aec367c81feb471
 
 ----------
 User Flow
