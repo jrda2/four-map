@@ -47,7 +47,7 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <h3> Restaurant List </h3> <p class="link_a" data-bind="click: clearPostalDrop"> (X)Clear Search </p>
           <ul data-bind="foreach: rest_markers" class="nav nav-sidebar">
-         <span data-bind= "visible: visible">
+         <span data-bind= "visible: setVis">
            <li class="res" data-bind="text: title, click: $root.bindMarker"></li>
            </span>
           </ul>
@@ -67,7 +67,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
 
-<script type="text/javascript" async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkYowSd7WqlQNvH4Fqy_TZDFb7IFainKY&callback=initMap&onerror=gError"></script>
+<script type="text/javascript" async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkYowSd7WqlQNvH4Fqy_TZDFb7IFainKY&callback=initMap" onerror="gError()"></script>
 
 </body>
 </html>
