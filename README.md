@@ -1,7 +1,7 @@
 Sushi Locator
 ===================
 
-Author: Daniel Estrada - daniel@dcge.co
+Author: Daniel Estrada at [daniel@dcge.co](daniel@dcge.co)
 
 Summary
 ===================
@@ -14,14 +14,14 @@ The map will load 30 locations and you are able to click on each marker for addi
 
 Demo
 ===================
-http://dev.daestrada.com/sushi-locator/app
+[http://dev.daestrada.com/sushi-locator/app](http://dev.daestrada.com/sushi-locator/app)
 
 API References
 ===================
-[Knockout.js](http://knockoutjs.com/)
-[Google Maps API](https://developers.google.com/maps/documentation/javascript/)
-[Foursquare Locations API](https://developer.foursquare.com/)
-[Bootstrap](http://getboostrap.com)
++ [Knockout.js](http://knockoutjs.com/)
++ [Google Maps API](https://developers.google.com/maps/documentation/javascript/)
++ [Foursquare Locations API](https://developer.foursquare.com/)
++ [Bootstrap](http://getboostrap.com)
 
 Languages
 ===================
