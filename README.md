@@ -5,8 +5,7 @@ Author: Daniel Estrada at [daniel@dcge.co](daniel@dcge.co)
 
 Summary
 ===================
-This is a project for Front End Web Dev nanodegree for Udacity. 
-The map allows you to see some of the sushi restaurants in Downtown San Francisco and filter based on select zip codes.
+This is a project focused on pulling Foursquare's API data to display the nearest Sushi restaurants within specific zip codes in San Francisco.
 
 User Flow
 ===================
@@ -29,6 +28,6 @@ Javascript
 
 How to run the app
 ===================
-Download or clone the repository from Github to your local machine. Click on index.html
-to view the app in your browser.
+1. Download or clone the repository from Github to your local machine. 
+2. Click on index.html to view the app in your browser.
 
