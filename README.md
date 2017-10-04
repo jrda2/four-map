@@ -1,4 +1,4 @@
-Sushi Locator
+SF Sushi Hunt
 ===================
 
 Author: Daniel Estrada at [daniel@dcge.co](daniel@dcge.co)
