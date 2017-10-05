@@ -1,33 +1,38 @@
-SF Sushi Hunt
-===================
+# SF Sushi Hunt App
 
-Author: Daniel Estrada at [daniel@dcge.co](daniel@dcge.co)
+Javascript web app built using Knockout.js, Google Maps API, and Foursquare API.
 
-Summary
-===================
-This is a project focused on pulling Foursquare's API data to display the nearest Sushi restaurants within specific zip codes in San Francisco.
-
-User Flow
-===================
+## User Flow
 The map will load 30 locations and you are able to click on each marker for additional information on the restaurant. You can also select from the sidebar list, which will activate that specific location's marker. The dropdown of zip codes will allow you to filter based on 4 different zip codes. Then you can select those restaurants from the sidebar. Each location's marker will display information from Foursquare: phone number, checkins, and user interactions.
 
-Demo
-===================
-[http://dev.daestrada.com/sushi-locator/app](http://dev.daestrada.com/sushi-locator/app)
 
-API References
-===================
-+ [Knockout.js](http://knockoutjs.com/)
-+ [Google Maps API](https://developers.google.com/maps/documentation/javascript/)
-+ [Foursquare Locations API](https://developer.foursquare.com/)
-+ [Bootstrap](http://getboostrap.com)
+## Demo
+* [Link](http://daestrada.com/sf-sushi-hunt/app)
 
-Languages
-===================
-Javascript
+## Installing
 
-How to run the app
-===================
-1. Download or clone the repository from Github to your local machine. 
-2. Click on index.html to view the app in your browser.
+Below is what you will need to run the development version of the app:
+
+* Clone the repo
+* Click on index.html to view the app in the browser
+
+
+## Built With
+
+* [Knockout.js](http://knockoutjs.com/) - Javascript Library
+* [Google Maps API](https://developers.google.com/maps/documentation/javascript/) - API
+* [Foursquare Locations API](https://developer.foursquare.com/) - REST API
+* [Bootstrap](http://getboostrap.com) - Front End Framework
+
+
+## Authors
+
+* **Daniel Estrada** - *Initial work* - [@jrda2](https://github.com/jrda2)
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+
 
