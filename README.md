@@ -7,7 +7,7 @@ The map will load 30 locations and you are able to click on each marker for addi
 
 
 ## Demo
-* [Link](http://daestrada.com/sf-sushi-hunt/app)
+* [Link](http://sushi-hunt.dcge.co)
 
 ## Installing
 
