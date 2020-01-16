@@ -28,23 +28,29 @@ function RestaurantViewModel() {
     //the data and add its to the map
     self.getContent = function() {
            $.ajax({
-                url: "https://api.foursquare.com/v2/venues/search?ll=37.784469,-122.407986&query=sushi&client_id=E1E35P1W212GWPC33YDDUJRXQOFNRG2JPBKKGJPWAY21GJ0J&client_secret=JSOSN3V25ODUMUCG1YAPI0CYNJ2CLGLUBT3Z0SJ1DNT5WBZS&v=20170524",
-
+                url: "https://api.yelp.com/v3/businesses/search?term=sushi&latitude=37.784469&longitude=-122.407986&limit=25",
                 jsonp: "callback",
-
-                dataType: "jsonp",
-
+                dataType: "json",
+                headers: {
+                    "accept": "application/json",
+                    "x-requested-with": "xmlhttprequest",
+                    "Access-Control-Allow-Origin":"*",
+                    "Authorization": "Bearer VbGMe3v39_lXqqxal6_6MANpj-L4NSyHTYkWGZWEbXk5UDJ64DkDhd8KK93rqXy0y2RYq8bgCwpHzHtlbWe0SWVJ4I3-C7otsoq5AMOWlj62HjYbWau1SO4sSIQZXnYx"
+                },
+                
                 data: {
-                 q: "select id,name,location.lat,location.lng, location.postalCode from response.venues",
+                 q: "select id,name,coordinates.latitude,coordinates.longitude,location.zip_code,price,rating,review_count,display_phone from response.businesses",
                  format: "json"
                 },
            success: function (response) {
-            for (var i = 0, length = response.response.venues.length; i < length; i++) {
-                self.processData(response.response.venues[i]);
+               console.log(response);
+            for (var i = 0, length = response.businesses.length; i < length; i++) {
+                self.processData(response.busisness[i]);
               }
                 self.addMapData(self.restaurants());
             },
             error: function () {
+                console.log(data);
                 alert("Foursquare API currently not connected, please ensure your Jquery is v2 or higher");
             }
         });
@@ -56,9 +62,10 @@ function RestaurantViewModel() {
                 '</div>'+
                 '<h1 id="firstHeading" class="firstHeading">' + restaurant.title + '</h1>'+
                 '<div id="bodyContent">'+
-                 '<p><b>Check Ins</b>: ' + restaurant.stats.checkins + '</br>' +
-                 '<p><b>Tips</b>: ' + restaurant.stats.tips + '</br>' +
-                 '<p><b>Foursquare Interactions</b>: ' + restaurant.stats.users + '</br>' +
+                 '<p><b>Price</b>: ' + restaurant.price + '</br>' +
+                 '<p><b>Rating</b>: ' + restaurant.rating + '</br>' +
+                 '<p><b>Review Count</b>: ' + restaurant.review_count + '</br>' +
+                 '<p><b>Phone Number</b>: ' + restaurant.display_phone + '</br>' +
                 '</div>'+
                 '</div>';
         return string;
@@ -69,14 +76,14 @@ function RestaurantViewModel() {
     self.processData = function(data_obj) {
         var rest_obj = {
             title: data_obj.name,
-            phone: data_obj.contact.phone,
-            lat: data_obj.location.lat,
-            lng: data_obj.location.lng,
-            postal: data_obj.location.postalCode,
+            phone: data_obj.display_phone,
+            lat: data_obj.coordinates.latitude,
+            lng: data_obj.coordinates.longitude,
+            postal: data_obj.location.zip_code,
             stats: {
-                checkins: data_obj.stats.checkinsCount,
-                tips: data_obj.stats.tipCount,
-                users: data_obj.stats.usersCount
+                price: data_obj.price,
+                rating: data_obj.rating,
+                tips: data_obj.review_count,
             }
         };
         self.restaurants().push(rest_obj);
